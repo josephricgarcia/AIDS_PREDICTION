@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../IMAGE/marian.jpg');
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.user-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.user-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.user-form input, .user-form select, .user-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+.user-form button {
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.user-form .button-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.user-form button[name="submit"] {
+    background-color: #007bff; /* Blue */
+}
+
+.user-form button[name="submit"]:hover {
+    background-color: #0056b3; /* Darker Blue */
+}
+
+.user-form button[name="cancel"] {
+    background-color: #dc3545; /* Red */
+}
+
+.user-form button[name="cancel"]:hover {
+    background-color: #bb2d3b; /* Darker Red */
+}
+
+.user-form a {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    color: #ff0000;
+    text-decoration: none;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px; /* Consistent bottom margin */
+}
+
+.form-row select, .form-row input {
+    flex: 1;
+    margin-bottom: 0; /* Remove individual margin */
+}
+
+/* Remove conflicting styles from .form-group */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%; /* Changed from 90% to 100% */
+    padding: 10px; /* Match other inputs */
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px; /* Match other inputs */
+}

@@ -1,0 +1,527 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-image: url(back.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: rgb(12, 2, 2);
+    line-height: 1.5;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #c1313f82;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar .logo {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    width: 100%;
+    text-align: center;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+/* Sidebar menu hover effect */
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.sidebar ul li a:hover {
+    background: #af1919; /* Change to preferred hover color */
+}
+
+header{
+    text-align:center;
+    padding: 60px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 40px;
+    display: flex;
+}
+
+/* Main Content */
+.container {
+    margin-left: 270px; /* Leave space for sidebar */
+    padding: 20px;
+    width: calc(100% - 350px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.main-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+}
+
+th {
+    background-color: #af1919;
+    color: white;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    background: #af1919;
+    color: white;
+    padding: 15px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    
+}
+
+
+
+
+/* Login form container */
+.login-form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Form title */
+.login-form h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #d66565;
+}
+
+/* Input fields */
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Submit button */
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #af4c4c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #45a049;
+}
+
+/* Error message */
+.error-message {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* User login link */
+.login-form .user-login-link {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.login-form .user-login-link:hover {
+    text-decoration: underline;
+}
+
+
+
+
+.admin-container {
+    width: 80%;
+    max-width: 1200px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-user-table th, .admin-user-table td {
+    border: 1px solid #161414;
+    padding: 8px;
+    text-align: left;
+}
+
+.admin-user-table th {
+    background-color: #9c3838;
+    font-weight: bold;
+}
+
+.admin-message {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.admin-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.admin-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.admin-action-buttons a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #ac4739;
+}
+
+.admin-action-buttons a:hover {
+    text-decoration: underline;
+}
+
+.admin-add-user-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #1a558dd6;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.admin-add-user-btn:hover {
+    background-color:#007bff;
+}
+
+
+
+        .user-form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .user-form h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .user-form input, .user-form select, .user-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .user-form button {
+            background-color: #a34c46;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .user-form button:hover {
+            background-color: #0056b3;
+        }
+        .user-form a {
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            margin-top: 10px;
+            color: #ff0000;
+            text-decoration: none;
+        }
+        .form-row {
+            display: flex;
+            gap: 10px;
+        }
+        .form-row select, .form-row input {
+            flex: 1;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .cancel-btn {
+            text-decoration: none;
+            color: #555;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .cancel-btn:hover {
+            background-color: #f4f4f4;
+        }
+
+        .error-message {
+            color: red;
+            background: #ffe6e6;
+            padding: 10px;
+            border: 1px solid red;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .password-note {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .assessment-form {
+            margin-top: 20px;
+        }
+        
+        .assessment-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .assessment {
+            margin-bottom: 15px;
+        }
+        
+        .assessment label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .assessment input,
+        .assessment select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .assessment input:focus,
+        .assessment select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        
+        button#submit-assessment {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        button#submit-assessment:hover {
+            background-color: #0056b3;
+        }
+   
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+        }
+        
+        ul li {
+            float: left;
+        }
+        
+        ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        
+        ul li a:hover {
+            background-color: #575757;
+        }
+        
+        .user-details {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .user-details img {
+            display: block;
+            margin: 0 auto 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        
+        .user-info {
+            margin: 10px 0;
+        }
+        
+        .user-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .user-row label {
+            font-weight: bold;
+        }
+        
+        .operation {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .edit-btn, .cancel-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .edit-btn {
+            background-color: #4CAF50;
+        }
+        
+        .cancel-btn {
+            background-color: #f44336;
+        }
+        
+        .edit-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .cancel-btn:hover {
+            background-color: #e53935;
+        }

@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../IMAGE/marian.jpg');
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.admin-container {
+    width: 80%;
+    max-width: 1200px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.admin-user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-user-table th, .admin-user-table td {
+    border: 1px solid #161414;
+    padding: 8px;
+    text-align: left;
+}
+
+.admin-user-table th {
+    background-color: #9c3838;
+    font-weight: bold;
+    color: white;
+}
+
+.admin-message {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.admin-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.admin-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.admin-action-buttons a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #ac4739;
+}
+
+.admin-action-buttons a:hover {
+    text-decoration: underline;
+}
+
+.admin-add-user-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #1a558dd6;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.admin-add-user-btn:hover {
+    background-color:#007bff;
+}
+
+tr {
+    color: white;
+}
+
+
+.admin-user-table td {
+    color: black;
+}
+
+.admin-logout-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #1a558dd6;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}

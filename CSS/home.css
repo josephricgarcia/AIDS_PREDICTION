@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../IMAGE/marian.jpg');
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    background: #533333b4;
+    width: 250px;
+    position: fixed;
+    height: 100%;
+    padding: 20px;
+    
+    
+}
+
+.sidebar .logo {
+    display: block;
+    margin: 0 auto 30px;
+    width: 180px;
+    margin-top: 10px;
+    
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    display: block;
+    
+}
+
+.sidebar ul li a:hover {
+    background: #ad5252;
+}
+
+.main-content {
+    margin-left: 500px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}

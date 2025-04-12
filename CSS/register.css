@@ -1,0 +1,168 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('../IMAGE/marian.jpg');
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Form Container */
+.form-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.form-header {
+    padding: 30px;
+    background-color: #c93f3fe4;
+    color: white;
+    text-align: center;
+}
+
+.form-header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.registration-form {
+    padding: 30px;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.name-fields {
+    display: flex;
+    gap: 15px;
+}
+
+.name-fields .input-field {
+    flex: 1;
+}
+
+.input-field {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-field input,
+.input-field select {
+    width: 100%;
+    padding: 15px 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s;
+    background-color: #f9f9f9;
+}
+
+.input-field input:focus,
+.input-field select:focus {
+    border-color: #6e8efb;
+    box-shadow: 0 0 0 3px rgba(110, 142, 251, 0.2);
+    outline: none;
+    background-color: #fff;
+}
+
+.input-field label {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: #777;
+    font-size: 16px;
+    transition: all 0.3s;
+    pointer-events: none;
+}
+
+.input-field input:focus + label,
+.input-field input:valid + label,
+.input-field select:focus + label,
+.input-field select:valid + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    background: #fff;
+    padding: 0 8px;
+    color: #6e8efb;
+}
+
+.select-field::after {
+    content: "▼";
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: #777;
+    pointer-events: none;
+}
+
+.date-label {
+    z-index: 1;
+}
+
+/* Button */
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #d84a1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background-color: #fe0000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(110, 142, 251, 0.3);
+}
+
+/* Form Footer */
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.form-footer a {
+    color: #6e8efb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.form-footer a:hover {
+    color: #5d7de8;
+    text-decoration: underline;
+}

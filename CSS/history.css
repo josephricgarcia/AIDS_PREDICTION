@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../IMAGE/marian.jpg');
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    background: #533333b4;
+    width: 250px;
+    position: fixed;
+    height: 100%;
+    padding: 20px;
+    
+    
+}
+
+.sidebar .logo {
+    display: block;
+    margin: 0 auto 30px;
+    width: 180px;
+    margin-top: 10px;
+    
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    display: block;
+    
+}
+
+.sidebar ul li a:hover {
+    background: #ad5252;
+}
+
+.history-content {
+    margin-left: 290px;
+    padding: 40px;
+    width: calc(100% - 250px);
+    background: rgba(255, 255, 255, 0.9);
+    min-height: 100vh;
+}
+
+.history-content h2 {
+    color: #533333;
+    margin-bottom: 30px;
+    font-size: 28px;
+    border-bottom: 2px solid #ad5252;
+    padding-bottom: 10px;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.history-table th,
+.history-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.history-table th {
+    background-color: #ad5252;
+    color: white;
+    font-weight: 600;
+}
+
+.history-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.edit-btn, .delete-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #45a049;
+}
+
+.delete-btn:hover {
+    background-color: #da190b;
+}
+
+.error {
+    color: #dc3545;
+    padding: 15px;
+    background: #f8d7da;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.no-assessments {
+    color: #6c757d;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.no-assessments a {
+    color: #ad5252;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.no-assessments a:hover {
+    text-decoration: underline;
+}

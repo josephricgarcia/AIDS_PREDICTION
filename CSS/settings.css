@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../IMAGE/marian.jpg');
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    background: #533333b4;
+    width: 250px;
+    position: fixed;
+    height: 100%;
+    padding: 20px;
+    
+    
+}
+
+.sidebar .logo {
+    display: block;
+    margin: 0 auto 30px;
+    width: 180px;
+    margin-top: 10px;
+    
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    display: block;
+    
+}
+
+.sidebar ul li a:hover {
+    background: #ad5252;
+}
+
+.settings-content {
+    margin-left: 500px;
+    padding: 40px;
+    min-height: 100vh;
+}
+
+.user-details {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.user-details img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-row {
+    margin: 1rem 0;
+    padding: 0.8rem;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.user-row label {
+    display: inline-block;
+    width: 120px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.operation {
+    text-align: center;
+    margin-top: 2rem;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.edit-btn {
+    background-color: #25609f;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.edit-btn:hover {
+    background-color: #007bff;
+    transform: translateY(-1px);
+}
+
+.cancel-btn {
+    background-color: #840d0d;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    flex: 1;
+    text-align: center;
+}
+
+.cancel-btn:hover {
+    background-color: #f70000;
+    transform: translateY(-1px);
+}
+
+a {
+    text-decoration: none;
+}

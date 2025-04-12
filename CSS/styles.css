@@ -1,0 +1,286 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    display: flex;  
+    min-height: 100vh;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    background: #ac2634;
+    width: 250px;
+    position: fixed;
+    height: 100%;
+    padding: 20px;
+}
+
+.sidebar .logo {
+    display: block;
+    margin: 0 auto 30px;
+    width: 180px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    display: block;
+    
+}
+
+.sidebar ul li a:hover {
+    background: #575757;
+}
+
+.main-content {
+    margin-left: 500px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+
+
+/* Login form container */
+.login-form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgb(218, 117, 117);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-form h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #d66565;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #af4c4c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.login-form .user-login-link {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.login-form .user-login-link:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+.container{
+    margin-left: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .assessment-form {
+        margin: 20px auto;
+        padding: 20px;
+        width: 30%;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .assessment-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .assessment {
+        margin-bottom: 15px;
+    }
+    
+    .assessment label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+    
+    .assessment input,
+    .assessment select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+    
+    .assessment input:focus,
+    .assessment select:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+    
+    #submit-assessment {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    #submit-assessment:hover {
+        background-color: #0056b3;
+    }
+
+
+
+
+/* about us*/
+/* Add these styles to your existing CSS */
+.about-content {
+    margin-left: 400px; /* Match sidebar width */
+    padding: 40px;
+    max-width: 1200px;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+.about-content h1,
+.about-content h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+.about-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.about-section,
+.mission-section,
+.features-section,
+.cta-section {
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+}
+
+.lead {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.feature-list,
+.benefits-list {
+    padding-left: 1.5rem;
+    line-height: 1.6;
+}
+
+.feature-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    transition: transform 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-3px);
+}
+
+.cta-button {
+    display: block;
+    width: 250px;
+    margin: 2rem auto 0;
+    padding: 1rem;
+    background: #ac2634;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #8a1e2a;
+}
+
+p {
+    line-height: 1.8;
+    text-align: justify;
+    color: #444;
+    margin-bottom: 1.2rem;
+}
+
+.features-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}

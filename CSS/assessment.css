@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../IMAGE/marian.jpg');
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    background: #533333b4;
+    width: 250px;
+    position: fixed;
+    height: 100%;
+    padding: 20px;
+    
+    
+}
+
+.sidebar .logo {
+    display: block;
+    margin: 0 auto 30px;
+    width: 180px;
+    margin-top: 10px;
+    
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    display: block;
+    
+}
+
+.sidebar ul li a:hover {
+    background: #ad5252;
+}
+
+
+
+.assessment-form {
+    margin: 20px auto;
+    padding: 20px;
+    width: 30%;
+    height: 80%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.assessment-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.assessment {
+    margin-bottom: 15px;
+}
+
+.assessment label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.assessment input,
+.assessment select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.assessment input:focus,
+.assessment select:focus {
+    border-color: #c62727;
+    outline: none;
+}
+
+#submit-assessment {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #c03636ea;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submit-assessment:hover {
+    background-color: #ae290f;
+}
