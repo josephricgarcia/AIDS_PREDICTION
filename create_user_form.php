@@ -2,16 +2,20 @@
 include 'connection.php';
 session_start();
 
+// Restrict access to admin only
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
     exit();
 }
 
+// Initialize variables
 $confirm_password = "";
 $lname = $fname = $mname = $gender = $birthday = $contact_no = $username = $role = "";
 
+// Check database connection
 if (!$dbhandle) {
-    die("Database connection failed: " . mysqli_connect_error());
+    echo "<script>alert('Database connection failed: " . mysqli_connect_error() . "');</script>";
+    exit();
 }
 
 if (isset($_POST['submit'])) {
@@ -21,7 +25,7 @@ if (isset($_POST['submit'])) {
     $mname = $_POST['mname'] ?? '';
     $gender = $_POST['gender'] ?? '';
     $birthday = $_POST['birthday'] ?? '';
-    $contact_no = $_POST['contact_number'] ?? ''; // Corrected variable assignment
+    $contact_no = $_POST['contact_number'] ?? '';
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
@@ -36,9 +40,10 @@ if (isset($_POST['submit'])) {
     // Server-side validation for required fields
     if (empty($lname) || empty($fname) || empty($mname) || empty($gender) || empty($birthday) || empty($contact_no) || empty($username) || empty($password) || empty($confirm_password) || empty($role)) {
         echo "<script>alert('All fields are required!');</script>";
-    } else if ($password != $confirm_password) {
+    } else if ($password !== $confirm_password) {
         echo "<script>alert('Passwords do not match!');</script>";
     } else {
+        // Check if username already exists
         $check_sql = "SELECT username FROM users WHERE username = ?";
         if ($stmt_check = mysqli_prepare($dbhandle, $check_sql)) {
             mysqli_stmt_bind_param($stmt_check, "s", $username);
@@ -48,17 +53,16 @@ if (isset($_POST['submit'])) {
             if (mysqli_stmt_num_rows($stmt_check) > 0) {
                 echo "<script>alert('Username already exists! Please choose a different username.');</script>";
             } else {
+                // Hash password and insert user
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
                 $sql = "INSERT INTO users (lname, fname, mname, gender, birthday, contact_number, username, password, role) 
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
                 if ($stmt = mysqli_prepare($dbhandle, $sql)) {
                     mysqli_stmt_bind_param($stmt, "sssssssss", $lname, $fname, $mname, $gender, $birthday, $contact_no, $username, $hashed_password, $role);
 
                     if (mysqli_stmt_execute($stmt)) {
-                        echo "<script>alert('Account created successfully!');</script>";
-                        header("Location: AdminDashboard.php");
+                        echo "<script>alert('Account created successfully!'); window.location.href='AdminDashboard.php';</script>";
                         exit();
                     } else {
                         echo "<script>alert('Account registration failed: " . mysqli_error($dbhandle) . "');</script>";
@@ -76,8 +80,6 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +90,6 @@ if (isset($_POST['submit'])) {
     <link rel="shortcut icon" href="images/stresssense_logo.png">
 </head>
 <body>
-
     <div class="user-form">
         <h1>Create User Account Here</h1>
         <form action="create_user_form.php" method="post">
@@ -98,17 +99,15 @@ if (isset($_POST['submit'])) {
             <div class="form-row">
                 <select id="gender" name="gender" required>
                     <option value="" disabled <?php echo empty($gender) ? 'selected' : ''; ?>>Gender</option>
-                    <option value="m" <?php echo $gender == 'm' ? 'selected' : ''; ?>>Male</option>
-                    <option value="f" <?php echo $gender == 'f' ? 'selected' : ''; ?>>Female</option>
-                    <option value="x" <?php echo $gender == 'x' ? 'selected' : ''; ?>>Prefer not to say</option>
+                    <option value="m" <?php echo $gender === 'm' ? 'selected' : ''; ?>>Male</option>
+                    <option value="f" <?php echo $gender === 'f' ? 'selected' : ''; ?>>Female</option>
+                    <option value="x" <?php echo $gender === 'x' ? 'selected' : ''; ?>>Prefer not to say</option>
                 </select>
-
                 <select id="role" name="role" required>
                     <option value="" disabled <?php echo empty($role) ? 'selected' : ''; ?>>Role</option>
-                    <option value="user" <?php echo $role == 'user' ? 'selected' : ''; ?>>User</option>
-                    <option value="admin" <?php echo $role == 'admin' ? 'selected' : ''; ?>>Admin</option>
+                    <option value="user" <?php echo $role === 'user' ? 'selected' : ''; ?>>User</option>
+                    <option value="admin" <?php echo $role === 'admin' ? 'selected' : ''; ?>>Admin</option>
                 </select>
-
                 <input type="date" id="birthday" name="birthday" value="<?php echo htmlspecialchars($birthday); ?>" required>
             </div>
             <input type="text" id="contact_no" name="contact_number" placeholder="Contact Number" value="<?php echo htmlspecialchars($contact_no); ?>" required>

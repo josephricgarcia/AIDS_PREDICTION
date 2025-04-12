@@ -3,7 +3,13 @@ include 'session.php';
 include 'connection.php';
 
 if (isset($_POST['submit'])) {
-    // Validate inputs
+    
+    if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+        echo "<script>alert('Error: User not logged in.'); window.location.href='login.php';</script>";
+        exit;
+    }
+
+
     $age = filter_input(INPUT_POST, 'age', FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]);
     $gender = $_POST['gender'] ?? '';
     $homosexual_activity = $_POST['homosexual_activity'] ?? '';
@@ -28,15 +34,30 @@ if (isset($_POST['submit'])) {
 
     if (empty($error)) {
         $userId = $_SESSION['user_id'];
-        // Ensure the 'id' column is auto-increment in the database
-        $stmt = mysqli_prepare($dbhandle, 
+
+        // Verify userId exists in users table
+        $checkUser = mysqli_prepare($dbhandle, "SELECT id FROM users WHERE id = ?");
+        mysqli_stmt_bind_param($checkUser, "i", $userId);
+        mysqli_stmt_execute($checkUser);
+        mysqli_stmt_store_result($checkUser);
+
+        if (mysqli_stmt_num_rows($checkUser) === 0) {
+            echo "<script>alert('Error: Invalid user ID.');</script>";
+            mysqli_stmt_close($checkUser);
+            exit;
+        }
+        mysqli_stmt_close($checkUser);
+
+        // Insert into assessment
+        $stmt = mysqli_prepare(
+            $dbhandle,
             "INSERT INTO assessment (userId, age, gender, homosexual_activity, drugs_history, race, weight) 
-             VALUES (?, ?, ?, ?, ?, ?, ?)"
+            VALUES (?, ?, ?, ?, ?, ?, ?)"
         );
         mysqli_stmt_bind_param($stmt, "isssssd", $userId, $age, $gender, $homosexual_activity, $drugs_history, $race, $weight);
 
         if (mysqli_stmt_execute($stmt)) {
-            echo "<script>alert('Assessment submitted successfully!');</script>";
+            echo "<script>alert('Assessment submitted successfully!'); window.location.href='Assess.php';</script>";
         } else {
             echo "<script>alert('Error: " . mysqli_error($dbhandle) . "');</script>";
         }

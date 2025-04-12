@@ -58,9 +58,9 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StressSense: Log In</title>
+    <title>AIDS-PREDICTION: Log In</title>
     <link rel="stylesheet" href="CSS/login.css">
-    <link rel="shortcut icon" href="images/stresssense_logo.png">
+    <link rel="shortcut icon" href="IMAGE/aidshiv.png">
 </head>
 
 <body>

@@ -86,12 +86,26 @@ tr {
     color: black;
 }
 
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .admin-logout-btn {
     display: inline-block;
-    margin-top: 20px;
-    padding: 10px 15px;
-    background-color: #1a558dd6;
+    padding: 10px 20px; 
+    background-color: #dc3545; 
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px; 
+}
+
+.admin-logout-btn:hover {
+    background-color: #c82333; 
 }

@@ -7,75 +7,74 @@
         exit();
     }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
-    $id = isset($_POST['id']) ? trim($_POST['id']) : null;
-    $lname = isset($_POST['lname']) ? trim($_POST['lname']) : null;
-    $fname = isset($_POST['fname']) ? trim($_POST['fname']) : null;
-    $mname = isset($_POST['mname']) ? trim($_POST['mname']) : null;
-    $gender = isset($_POST['gender']) ? trim($_POST['gender']) : null;
-    $birthday = isset($_POST['birthday']) ? trim($_POST['birthday']) : null;
-    $cno = isset($_POST['contact_number']) ? trim($_POST['contact_number']) : null;
-    $username = isset($_POST['username']) ? trim($_POST['username']) : null;
-    $password = isset($_POST['password']) ? trim($_POST['password']) : null;
-    $role = isset($_POST['role']) ? trim($_POST['role']) : null; // Added role
+        $id = isset($_POST['id']) ? trim($_POST['id']) : null;
+        $lname = isset($_POST['lname']) ? trim($_POST['lname']) : null;
+        $fname = isset($_POST['fname']) ? trim($_POST['fname']) : null;
+        $mname = isset($_POST['mname']) ? trim($_POST['mname']) : null;
+        $gender = isset($_POST['gender']) ? trim($_POST['gender']) : null;
+        $birthday = isset($_POST['birthday']) ? trim($_POST['birthday']) : null;
+        $cno = isset($_POST['contact_number']) ? trim($_POST['contact_number']) : null;
+        $username = isset($_POST['username']) ? trim($_POST['username']) : null;
+        $password = isset($_POST['password']) ? trim($_POST['password']) : null;
+        $role = isset($_POST['role']) ? trim($_POST['role']) : null;
 
-    if (!$dbhandle) {
-        die("Database connection failed: " . mysqli_connect_error());
-    }
-
-    // Update user data
-    $sql = "UPDATE users SET lname = ?, fname = ?, mname = ?, gender = ?, birthday = ?, contact_number = ?, username = ?, role = ?" . // Added role
-           (!empty($password) ? ", password = ?" : "") . " WHERE id = ?";
-    $stmt = mysqli_prepare($dbhandle, $sql);
-
-    if ($stmt) {
-        if (!empty($password)) {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            mysqli_stmt_bind_param($stmt, "sssssssssi", $lname, $fname, $mname, $gender, $birthday, $cno, $username, $role, $hashed_password, $id); // Added $role
-        } else {
-            mysqli_stmt_bind_param($stmt, "ssssssssi", $lname, $fname, $mname, $gender, $birthday, $cno, $username, $role, $id); // Added $role
+        if (!$dbhandle) {
+            die("Database connection failed: " . mysqli_connect_error());
         }
 
-        if (mysqli_stmt_execute($stmt)) {
-            $_SESSION['success_message'] = "User information updated successfully.";
-            header("Location: AdminDashboard.php");
-            exit();
+        // Update user data
+        $sql = "UPDATE users SET lname = ?, fname = ?, mname = ?, gender = ?, birthday = ?, contact_number = ?, username = ?, role = ?" .
+               (!empty($password) ? ", password = ?" : "") . " WHERE id = ?";
+        $stmt = mysqli_prepare($dbhandle, $sql);
+
+        if ($stmt) {
+            if (!empty($password)) {
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                mysqli_stmt_bind_param($stmt, "sssssssssi", $lname, $fname, $mname, $gender, $birthday, $cno, $username, $role, $hashed_password, $id);
+            } else {
+                mysqli_stmt_bind_param($stmt, "ssssssssi", $lname, $fname, $mname, $gender, $birthday, $cno, $username, $role, $id);
+            }
+
+            if (mysqli_stmt_execute($stmt)) {
+                echo "<script>
+                    alert('User information updated successfully.');
+                    window.location.href = 'AdminDashboard.php';
+                </script>";
+            } else {
+                echo "<script>
+                    alert('Failed to update user information.');
+                    window.location.href = 'edit_user_form.php?id=$id';
+                </script>";
+            }
+
+            mysqli_stmt_close($stmt);
         } else {
-            $_SESSION['error_message'] = "Failed to update user information.";
-            // Re-fetch user data
-            $sql_select = "SELECT * FROM users WHERE id = ?";
-            $stmt_select = mysqli_prepare($dbhandle, $sql_select);
-            mysqli_stmt_bind_param($stmt_select, "i", $id);
-            mysqli_stmt_execute($stmt_select);
-            $result = mysqli_stmt_get_result($stmt_select);
+            error_log("Prepare failed updating user: " . mysqli_error($dbhandle));
+            echo "<script>
+                alert('Database error updating user data.');
+                window.location.href = 'edit_user_form.php?id=$id';
+            </script>";
+        }
+
+        mysqli_close($dbhandle);
+    } elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+        include 'connection.php';
+        $id = $_GET['id'];
+        $sql = "SELECT * FROM users WHERE id = ?";
+        $stmt = mysqli_prepare($dbhandle, $sql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
             $edit_user = mysqli_fetch_assoc($result);
-            mysqli_stmt_close($stmt_select);
+            mysqli_stmt_close($stmt);
+        } else {
+            die("Error fetching user data: " . mysqli_error($dbhandle));
         }
-
-        mysqli_stmt_close($stmt);
-    } else {
-        error_log("Prepare failed updating user: " . mysqli_error($dbhandle));
-        $_SESSION['error_message'] = "Database error updating user data.";
+        mysqli_close($dbhandle);
     }
-
-    mysqli_close($dbhandle);
-} elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
-    include 'connection.php';
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM users WHERE id = ?";
-    $stmt = mysqli_prepare($dbhandle, $sql);
-    if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "i", $id);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $edit_user = mysqli_fetch_assoc($result);
-        mysqli_stmt_close($stmt);
-    } else {
-        die("Error fetching user data: " . mysqli_error($dbhandle));
-    }
-    mysqli_close($dbhandle);
-}
 ?>
 
 <!DOCTYPE html>

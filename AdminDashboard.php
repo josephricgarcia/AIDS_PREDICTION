@@ -2,7 +2,6 @@
 include 'session.php';
 include 'connection.php'; 
 
-
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
     exit();
@@ -13,20 +12,19 @@ if (!$dbhandle) {
 }
 
 $users = [];
-$sql = "SELECT * FROM users ORDER BY id DESC";
+$sql = "SELECT * FROM users";
 $result = mysqli_query($dbhandle, $sql);
 if ($result) {
     $users = mysqli_fetch_all($result, MYSQLI_ASSOC); 
     mysqli_free_result($result); 
 } else {
-     error_log("Query failed for fetching all users: (" . mysqli_errno($dbhandle) . ") " . mysqli_error($dbhandle));
+    error_log("Query failed for fetching all users: (" . mysqli_errno($dbhandle) . ") " . mysqli_error($dbhandle));
 }
 
 $error_message = $_SESSION['error_message'] ?? null;
 $success_message = $_SESSION['success_message'] ?? null;
 unset($_SESSION['error_message'], $_SESSION['success_message']); 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,22 +34,19 @@ unset($_SESSION['error_message'], $_SESSION['success_message']);
     <title>StresSense: Admin Dashboard</title>
     <link rel="stylesheet" href="CSS/admindashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
 </head>
 <body>
-    
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Manage Users</h1>
+        <a href="logout.php" class="admin-logout-btn" onclick="return confirm('Are you sure you want to logout?')">Logout</a>
+    </div>
 
-    <div class="admin-container">
-        <h1> Manage Users</h1>
-        <div class="admin-header">
-            <a href="logout.php" class="admin-logout-btn">Logout</a>
-        </div>
         <?php if ($error_message): ?>
             <div class="admin-message admin-error"><?php echo htmlspecialchars($error_message); ?></div>
         <?php endif; ?>
         <?php if ($success_message): ?>
-             <div class="admin-message admin-success"><?php echo htmlspecialchars($success_message); ?></div>
+            <div class="admin-message admin-success"><?php echo htmlspecialchars($success_message); ?></div>
         <?php endif; ?>
 
         <table class="admin-user-table">
@@ -111,11 +106,9 @@ unset($_SESSION['error_message'], $_SESSION['success_message']);
             <i class="fas fa-user-plus"></i> Add New User
         </a>
     </div>
-
 </body>
 </html>
 <?php
-// Close the database connection at the end of the script
 if ($dbhandle) {
     mysqli_close($dbhandle);
 }

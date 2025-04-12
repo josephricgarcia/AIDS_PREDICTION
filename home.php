@@ -19,9 +19,13 @@
             <li><a href="Settings.php"> Settings </a></li>
         </ul>
     </aside>
-        
+
         <div class="main-content">
+        <div class="history-content">
+    <h2>Assessment History</h2>
+    </div>
         <div class="container">
+
             <h2>Welcome to HIV/AIDS Treatment Data</h2>
             <p>This platform provides essential data and resources related to HIV/AIDS treatment and awareness.</p>
             <img src="IMAGE/2.jpg" alt="HIV Awareness">
