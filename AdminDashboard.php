@@ -67,7 +67,7 @@ unset($_SESSION['error_message'], $_SESSION['success_message']);
             <tbody>
                 <?php if (empty($users)): ?>
                     <tr>
-                        <td colspan="9" style="text-align: center;">No users found.</td>
+                        <td colspan="10" style="text-align: center;">No users found.</td>
                     </tr>
                 <?php else: ?>
                     <?php foreach ($users as $user): ?>
@@ -92,10 +92,13 @@ unset($_SESSION['error_message'], $_SESSION['success_message']);
                                 <a href="edit_user_form.php?id=<?php echo $user['id']; ?>" class="admin-edit-btn">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
-                                <a href="process_user.php?action=delete&id=<?php echo $user['id']; ?>" class="admin-delete-btn"
-                                   onclick="return confirm('Are you sure you want to delete this user? This action cannot be undone.')">
-                                    <i class="fas fa-trash-alt"></i> Delete
-                                </a>
+                                <form method="POST" action="process_user.php" style="display: inline;">
+                                    <input type="hidden" name="action" value="delete">
+                                    <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                                    <button type="submit" class="admin-delete-btn" onclick="return confirm('Are you sure you want to delete this user? This action cannot be undone.')">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>

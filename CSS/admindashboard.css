@@ -1,11 +1,11 @@
 body {
     font-family: Arial, sans-serif;
     background-image: url('../IMAGE/marian.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
 }
 
@@ -108,4 +108,19 @@ tr {
 
 .admin-logout-btn:hover {
     background-color: #c82333; 
+}
+
+.admin-delete-btn {
+    background: none;
+    border: none;
+    color: #ac4739;
+    padding: 0;
+    cursor: pointer;
+    font-size: inherit;
+    margin-left: 10px;
+}
+
+.admin-delete-btn:hover {
+    text-decoration: underline;
+    color: #ac4739;
 }

@@ -6,11 +6,14 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
     background-image: url('../IMAGE/marian.jpg');
-    color: #333;
-    line-height: 1.6;
-    padding: 20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
 }
 
 .container {

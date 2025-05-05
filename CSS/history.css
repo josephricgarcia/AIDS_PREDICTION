@@ -1,9 +1,10 @@
 body {
     font-family: Arial, sans-serif;
     background-image: url('../IMAGE/marian.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 0;
     padding: 0;
-    display: flex;
     height: 100vh;
 }
 
@@ -13,8 +14,6 @@ body {
     position: fixed;
     height: 100%;
     padding: 20px;
-    
-    
 }
 
 .sidebar .logo {
@@ -22,7 +21,6 @@ body {
     margin: 0 auto 30px;
     width: 180px;
     margin-top: 10px;
-    
 }
 
 .sidebar ul {
@@ -35,7 +33,6 @@ body {
     text-decoration: none;
     padding: 15px 25px;
     display: block;
-    
 }
 
 .sidebar ul li a:hover {
@@ -43,11 +40,13 @@ body {
 }
 
 .history-content {
-    margin-left: 290px;
+    margin-left: 290px; /* 250px sidebar + 40px padding */
     padding: 40px;
-    width: calc(100% - 250px);
+    width: calc(100% - 290px);
     background: rgba(255, 255, 255, 0.9);
     min-height: 100vh;
+    box-sizing: border-box; /* Include padding in width */
+    overflow-x: auto; /* Enable horizontal scrollbar for content */
 }
 
 .history-content h2 {
@@ -58,11 +57,17 @@ body {
     padding-bottom: 10px;
 }
 
+.table-container {
+    min-width: 1000px; /* Minimum width to force scroll */
+    overflow-x: auto; /* Scroll only inside the table */
+}
+
 .history-table {
     width: 100%;
     border-collapse: collapse;
     background: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    table-layout: auto;
 }
 
 .history-table th,
@@ -70,6 +75,7 @@ body {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #eee;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 .history-table th {

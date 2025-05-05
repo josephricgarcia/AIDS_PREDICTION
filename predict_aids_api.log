@@ -1,0 +1,17 @@
+2025-05-04 19:44:47,026 INFO: Successfully loaded model: aids_model.keras
+2025-05-04 19:44:47,037 INFO: Successfully loaded scaler: scaler.pkl
+2025-05-04 19:44:47,044 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.254.140:5000
+2025-05-04 19:44:47,044 INFO: [33mPress CTRL+C to quit[0m
+2025-05-04 19:47:52,844 INFO: Received input data: {'age': 20, 'weight': 21, 'homo': 0, 'drugs': 0, 'oprior': 0, 'z30': 0, 'gender': 1, 'str2': 0, 'symptom': 0, 'treat': 0, 'offtrt': 0}
+2025-05-04 19:47:52,846 INFO: Input dataframe created successfully.
+2025-05-04 19:47:52,848 INFO: Successfully scaled features: age, wtkg
+2025-05-04 19:47:52,946 INFO: Prediction successful: probability=0.5522673, infected=1
+2025-05-04 19:47:52,947 INFO: 127.0.0.1 - - [04/May/2025 19:47:52] "POST /predict HTTP/1.1" 200 -
+2025-05-04 19:48:19,551 INFO: Received input data: {'age': 21, 'weight': 20, 'homo': 0, 'drugs': 0, 'oprior': 0, 'z30': 0, 'gender': 0, 'str2': 0, 'symptom': 0, 'treat': 0, 'offtrt': 0}
+2025-05-04 19:48:19,551 INFO: Input dataframe created successfully.
+2025-05-04 19:48:19,553 INFO: Successfully scaled features: age, wtkg
+2025-05-04 19:48:19,613 INFO: Prediction successful: probability=0.57589495, infected=1
+2025-05-04 19:48:19,613 INFO: 127.0.0.1 - - [04/May/2025 19:48:19] "POST /predict HTTP/1.1" 200 -
