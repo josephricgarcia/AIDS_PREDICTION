@@ -15,3 +15,5 @@
 2025-05-04 19:48:19,553 INFO: Successfully scaled features: age, wtkg
 2025-05-04 19:48:19,613 INFO: Prediction successful: probability=0.57589495, infected=1
 2025-05-04 19:48:19,613 INFO: 127.0.0.1 - - [04/May/2025 19:48:19] "POST /predict HTTP/1.1" 200 -
+2025-05-07 20:42:11,903 INFO: Successfully loaded model: aids_model.keras
+2025-05-07 20:42:12,205 INFO: Successfully loaded scaler: scaler.pkl

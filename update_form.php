@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_user'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StresSense</title>
+    <title>Aids Prediction: Account</title>
     <link rel="stylesheet" href="css/update_form.css">
     <link rel="shortcut icon" href="images/stresssense_logo.png">
 </head>

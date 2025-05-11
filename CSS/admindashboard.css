@@ -1,126 +1,125 @@
 body {
     font-family: Arial, sans-serif;
     background-image: url('../IMAGE/marian.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
     margin: 0;
     padding: 0;
     display: flex;
     height: 100vh;
 }
 
-.admin-container {
-    width: 80%;
-    max-width: 1200px;
-    background: #fff;
+.sidebar {
+    background: #533333b4;
+    width: 250px;
+    position: fixed;
+    height: 100%;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
-.admin-user-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+.sidebar .logo {
+    display: block;
+    margin: 0 auto 30px;
+    width: 180px;
+    margin-top: 10px;
 }
 
-.admin-user-table th, .admin-user-table td {
-    border: 1px solid #161414;
-    padding: 8px;
-    text-align: left;
-}
-
-.admin-user-table th {
-    background-color: #9c3838;
-    font-weight: bold;
-    color: white;
-}
-
-.admin-message {
-    margin-bottom: 20px;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.admin-error {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-.admin-success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.admin-action-buttons a {
-    margin-right: 10px;
-    text-decoration: none;
-    color: #ac4739;
-}
-
-.admin-action-buttons a:hover {
-    text-decoration: underline;
-}
-
-.admin-add-user-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 15px;
-    background-color: #1a558dd6;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.admin-add-user-btn:hover {
-    background-color:#007bff;
-}
-
-tr {
-    color: white;
-}
-
-
-.admin-user-table td {
-    color: black;
-}
-
-
-.admin-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.admin-logout-btn {
-    display: inline-block;
-    padding: 10px 20px; 
-    background-color: #dc3545; 
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px; 
-}
-
-.admin-logout-btn:hover {
-    background-color: #c82333; 
-}
-
-.admin-delete-btn {
-    background: none;
-    border: none;
-    color: #ac4739;
+.sidebar ul {
+    list-style: none;
     padding: 0;
-    cursor: pointer;
-    font-size: inherit;
-    margin-left: 10px;
 }
 
-.admin-delete-btn:hover {
-    text-decoration: underline;
-    color: #ac4739;
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    display: block;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+    background: #ad5252;
+}
+
+.sidebar ul li a.logout-btn {
+    background: #e53e3e;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar ul li a.logout-btn:hover {
+    background: #c53030;
+}
+
+.sidebar ul li a.logout-btn i {
+    margin-right: 8px;
+}
+
+.main-content {
+    margin-left: 35%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.container p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.container h3 {
+    color: #333;
+    margin-top: 20px;
+}
+
+.container ul {
+    list-style: disc;
+    padding-left: 20px;
+    text-align: left;
+    color: #555;
+}
+
+.container ul li {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    .main-content {
+        margin-left: 240px;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
 }

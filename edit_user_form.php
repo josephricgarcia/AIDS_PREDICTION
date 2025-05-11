@@ -40,7 +40,7 @@
             if (mysqli_stmt_execute($stmt)) {
                 echo "<script>
                     alert('User information updated successfully.');
-                    window.location.href = 'AdminDashboard.php';
+                    window.location.href = 'accounts.php';
                 </script>";
             } else {
                 echo "<script>
@@ -123,7 +123,7 @@
 
             <div class="button-row">
                 <button type="submit" name="submit">Update User</button>
-                <button type="button" name="cancel" onclick="window.location.href='AdminDashboard.php';">Cancel</button>
+                <button type="button" name="cancel" onclick="window.location.href='accounts.php';">Cancel</button>
             </div>
         </form>
     </div>

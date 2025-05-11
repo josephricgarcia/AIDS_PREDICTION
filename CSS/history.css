@@ -3,8 +3,10 @@ body {
     background-image: url('../IMAGE/marian.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
+    display: flex;
     height: 100vh;
 }
 

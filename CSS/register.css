@@ -1,42 +1,44 @@
-/* Base Styles */
+/* Reset and Base Styles */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background-image: url('../IMAGE/marian.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
     margin: 0;
-    padding: 0;
-    display: flex;
-    height: 100vh;
 }
 
+/* Container */
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding: 20px;
 }
 
 /* Form Container */
 .form-container {
-    background: #fff;
+    background: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     width: 100%;
     max-width: 500px;
     overflow: hidden;
 }
 
+/* Form Header */
 .form-header {
     padding: 30px;
-    background-color: #c93f3fe4;
-    color: white;
+    background-color: #c93f3f;
+    color: #ffffff;
     text-align: center;
 }
 
@@ -51,11 +53,12 @@ body {
     opacity: 0.9;
 }
 
+/* Registration Form */
 .registration-form {
     padding: 30px;
 }
 
-/* Form Elements */
+/* Form Group */
 .form-group {
     margin-bottom: 20px;
 }
@@ -69,6 +72,7 @@ body {
     flex: 1;
 }
 
+/* Input Fields */
 .input-field {
     position: relative;
     margin-bottom: 20px;
@@ -81,7 +85,7 @@ body {
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     font-size: 16px;
-    transition: all 0.3s;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     background-color: #f9f9f9;
 }
 
@@ -90,16 +94,17 @@ body {
     border-color: #6e8efb;
     box-shadow: 0 0 0 3px rgba(110, 142, 251, 0.2);
     outline: none;
-    background-color: #fff;
+    background-color: #ffffff;
 }
 
+/* Floating Labels */
 .input-field label {
     position: absolute;
     top: 15px;
     left: 20px;
-    color: #777;
+    color: #777777;
     font-size: 16px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     pointer-events: none;
 }
 
@@ -110,9 +115,14 @@ body {
     top: -10px;
     left: 10px;
     font-size: 12px;
-    background: #fff;
+    background: #ffffff;
     padding: 0 8px;
     color: #6e8efb;
+}
+
+/* Select Field Styling */
+.select-field {
+    position: relative;
 }
 
 .select-field::after {
@@ -121,26 +131,27 @@ body {
     top: 50%;
     right: 15px;
     transform: translateY(-50%);
-    color: #777;
+    color: #777777;
     pointer-events: none;
 }
 
+/* Date Field */
 .date-label {
     z-index: 1;
 }
 
-/* Button */
+/* Submit Button */
 .submit-btn {
     width: 100%;
     padding: 15px;
     background-color: #d84a1a;
-    color: white;
+    color: #ffffff;
     border: none;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     margin-top: 10px;
 }
 
@@ -150,22 +161,33 @@ body {
     box-shadow: 0 5px 15px rgba(110, 142, 251, 0.3);
 }
 
+.submit-btn:focus {
+    outline: 2px solid #6e8efb;
+    outline-offset: 2px;
+}
+
 /* Form Footer */
 .form-footer {
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
-    color: #666;
+    color: #666666;
 }
 
 .form-footer a {
     color: #6e8efb;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
 .form-footer a:hover {
     color: #5d7de8;
     text-decoration: underline;
+}
+
+/* Accessibility Enhancements */
+:focus-visible {
+    outline: 2px solid #6e8efb;
+    outline-offset: 2px;
 }

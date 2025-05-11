@@ -1,0 +1,244 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../IMAGE/marian.jpg');
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    background: #533333b4;
+    width: 250px;
+    position: fixed;
+    height: 100%;
+    padding: 20px;
+}
+
+.sidebar .logo {
+    display: block;
+    margin: 0 auto 30px;
+    width: 180px;
+    margin-top: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    display: block;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+    background: #ad5252;
+}
+
+.main-content {
+    margin-left: 290px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.container p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.container h3 {
+    color: #333;
+    margin-top: 20px;
+}
+
+.container ul {
+    list-style: disc;
+    padding-left: 20px;
+    text-align: left;
+    color: #555;
+}
+
+.container ul li {
+    margin-bottom: 10px;
+}
+
+.logout-btn {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #e53e3e;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: #c53030;
+}
+
+.logout-btn i {
+    margin-right: 8px;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.message i {
+    margin-right: 10px;
+}
+
+.error {
+    background: #fefcbf;
+    color: #744210;
+}
+
+.success {
+    background: #c6f6d5;
+    color: #2f855a;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.user-table th, .user-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.user-table th {
+    background: #4a90e2;
+    color: #fff;
+    font-weight: 600;
+}
+
+.user-table td {
+    color: #4a5568;
+}
+
+.user-table tr:hover {
+    background: #f7fafc;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.edit-btn {
+    background: #edf2f7;
+    color: #4a5568;
+}
+
+.edit-btn:hover {
+    background: #e2e8f0;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #e53e3e;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #fff5f5;
+}
+
+.add-user-btn {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #4a90e2;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.add-user-btn:hover {
+    background: #2b6cb0;
+}
+
+.add-user-btn i {
+    margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    .main-content {
+        margin-left: 240px;
+    }
+    .user-table {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    .user-table {
+        font-size: 12px;
+    }
+}

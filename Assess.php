@@ -2,10 +2,16 @@
 include 'session.php';
 include 'connection.php';
 
+$showResult = false;
+$probability = 0;
+$infected = 0;
+$errorMessage = '';
+
 if (isset($_POST['submit'])) {
     // Check if user is logged in
     if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
-        echo "<script>alert('Error: User not logged in.'); window.location.href='login.php';</script>";
+        $errorMessage = "Error: User not logged in.";
+        header("Location: login.php");
         exit;
     }
 
@@ -22,32 +28,31 @@ if (isset($_POST['submit'])) {
     $treat = filter_input(INPUT_POST, 'treat', FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 1]]);
     $offtrt = filter_input(INPUT_POST, 'offtrt', FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 1]]);
 
-    $error = '';
     if ($age === false || $age === null) {
-        $error = "Invalid age.";
+        $errorMessage = "Invalid age.";
     } elseif ($weight === false || $weight === null) {
-        $error = "Invalid weight.";
+        $errorMessage = "Invalid weight.";
     } elseif ($homo === null) {
-        $error = "Invalid homosexual activity selection.";
+        $errorMessage = "Invalid homosexual activity selection.";
     } elseif ($drugs === null) {
-        $error = "Invalid drugs history selection.";
+        $errorMessage = "Invalid drugs history selection.";
     } elseif ($oprior === null) {
-        $error = "Invalid prior opportunistic infection selection.";
+        $errorMessage = "Invalid prior opportunistic infection selection.";
     } elseif ($z30 === null) {
-        $error = "Invalid AZT use selection.";
+        $errorMessage = "Invalid AZT use selection.";
     } elseif ($gender === null) {
-        $error = "Invalid gender selection.";
+        $errorMessage = "Invalid gender selection.";
     } elseif ($str2 === null) {
-        $error = "Invalid antiretroviral history selection.";
+        $errorMessage = "Invalid antiretroviral history selection.";
     } elseif ($symptom === null) {
-        $error = "Invalid symptomatic indicator selection.";
+        $errorMessage = "Invalid symptomatic indicator selection.";
     } elseif ($treat === null) {
-        $error = "Invalid treatment indicator selection.";
+        $errorMessage = "Invalid treatment indicator selection.";
     } elseif ($offtrt === null) {
-        $error = "Invalid off-treatment indicator selection.";
+        $errorMessage = "Invalid off-treatment indicator selection.";
     }
 
-    if (empty($error)) {
+    if (empty($errorMessage)) {
         $userId = $_SESSION['user_id'];
 
         // Verify userId exists in users table
@@ -57,67 +62,63 @@ if (isset($_POST['submit'])) {
         mysqli_stmt_store_result($checkUser);
 
         if (mysqli_stmt_num_rows($checkUser) === 0) {
-            echo "<script>alert('Error: Invalid user ID.');</script>";
+            $errorMessage = "Error: Invalid user ID.";
             mysqli_stmt_close($checkUser);
-            exit;
-        }
-        mysqli_stmt_close($checkUser);
-
-        // Call Flask API for prediction
-        $url = "http://localhost:5000/predict";
-        $data = [
-            "age" => $age,
-            "weight" => $weight,
-            "homo" => $homo,
-            "drugs" => $drugs,
-            "oprior" => $oprior,
-            "z30" => $z30,
-            "gender" => $gender,
-            "str2" => $str2,
-            "symptom" => $symptom,
-            "treat" => $treat,
-            "offtrt" => $offtrt
-        ];
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        $output = curl_exec($ch);
-        $curl_error = curl_error($ch);
-        curl_close($ch);
-
-        if ($output === false || trim($output) === '') {
-            echo "<script>alert('Error: Prediction failed. Unable to connect to prediction API. $curl_error');</script>";
-            exit;
-        }
-
-        $result = json_decode($output, true);
-        if (!$result || !isset($result['probability']) || !isset($result['infected'])) {
-            echo "<script>alert('Error: Invalid prediction output from API. Output: " . addslashes($output) . "');</script>";
-            exit;
-        }
-
-        $probability = $result['probability'];
-        $infected = $result['infected'];
-
-        // Insert into assessment
-        $stmt = mysqli_prepare(
-            $dbhandle,
-            "INSERT INTO assessment (userId, age, weight, homo, drugs, oprior, z30, gender, str2, symptom, treat, offtrt, probability, infected) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-        );
-        mysqli_stmt_bind_param($stmt, "idiidiiiiiiiid", $userId, $age, $weight, $homo, $drugs, $oprior, $z30, $gender, $str2, $symptom, $treat, $offtrt, $probability, $infected);
-
-        if (mysqli_stmt_execute($stmt)) {
-            echo "<script>alert('Assessment submitted successfully! Probability of infection: " . number_format($probability * 100, 2) . "% (" . ($infected ? "Infected" : "Not Infected") . ")'); window.location.href='Assess.php';</script>";
         } else {
-            echo "<script>alert('Error: " . mysqli_error($dbhandle) . "');</script>";
+            mysqli_stmt_close($checkUser);
+
+            // Call Flask API for prediction
+            $url = "http://localhost:5000/predict";
+            $data = [
+                "age" => $age,
+                "weight" => $weight,
+                "homo" => $homo,
+                "drugs" => $drugs,
+                "oprior" => $oprior,
+                "z30" => $z30,
+                "gender" => $gender,
+                "str2" => $str2,
+                "symptom" => $symptom,
+                "treat" => $treat,
+                "offtrt" => $offtrt
+            ];
+
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+            $output = curl_exec($ch);
+            $curl_error = curl_error($ch);
+            curl_close($ch);
+
+            if ($output === false || trim($output) === '') {
+                $errorMessage = "Error: Prediction failed. Unable to connect to prediction API. $curl_error";
+            } else {
+                $result = json_decode($output, true);
+                if (!$result || !isset($result['probability']) || !isset($result['infected'])) {
+                    $errorMessage = "Error: Invalid prediction output from API. Output: " . addslashes($output);
+                } else {
+                    $probability = $result['probability'];
+                    $infected = $result['infected'];
+
+                    // Insert into assessment
+                    $stmt = mysqli_prepare(
+                        $dbhandle,
+                        "INSERT INTO assessment (userId, age, weight, homo, drugs, oprior, z30, gender, str2, symptom, treat, offtrt, probability, infected) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                    );
+                    mysqli_stmt_bind_param($stmt, "idiidiiiiiiiid", $userId, $age, $weight, $homo, $drugs, $oprior, $z30, $gender, $str2, $symptom, $treat, $offtrt, $probability, $infected);
+
+                    if (mysqli_stmt_execute($stmt)) {
+                        $showResult = true;
+                    } else {
+                        $errorMessage = "Error: " . mysqli_error($dbhandle);
+                    }
+                    mysqli_stmt_close($stmt);
+                }
+            }
         }
-        mysqli_stmt_close($stmt);
-    } else {
-        echo "<script>alert('$error');</script>";
     }
 }
 ?>
@@ -142,118 +143,123 @@ if (isset($_POST['submit'])) {
         </ul>
     </aside>
 
-    <div class="assessment-form">
-        <form action="Assess.php" method="post">
-            <h2>Assessment Form</h2>
-            <table>
-                <tr>
-
-                    <td class="assessment">
-                        <label for="age">Age (years)</label>
-                        <input type="number" id="age" name="age" min="0" required>
-                    </td>
-                    
-
-                    <td class="assessment">
-                        <label for="weight">Weight (kg)</label>
-                        <input type="number" id="weight" name="weight" step="0.1" min="0" required>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="assessment">
-                        <label for="homo">Homosexual Activity</label>
-                        <select id="homo" name="homo" required>
-                            <option value="">Select</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </td>
-                    
-                    <td class="assessment">
-                        <label for="drugs">History of IV Drug Use</label>
-                        <select id="drugs" name="drugs" required>
-                            <option value="">Select</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="assessment">
-                        <label for="oprior">Prior Opportunistic Infection</label>
-                        <select id="oprior" name="oprior" required>
-                            <option value="">Select</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </td>
-                    
-                    <td class="assessment">
-                        <label for="z30">AZT Use in Last 30 Days</label>
-                        <select id="z30" name="z30" required>
-                            <option value="">Select</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="assessment">
-                        <label for="gender">Gender</label>
-                        <select id="gender" name="gender" required>
-                            <option value="">Select</option>
-                            <option value="0">Male</option>
-                            <option value="1">Female</option>
-                        </select>
-                    </td>
-                    
-                    <td class="assessment">
-                        <label for="str2">Antiretroviral History</label>
-                        <select id="str2" name="str2" required>
-                            <option value="">Select</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="assessment">
-                        <label for="symptom">Symptomatic Indicator</label>
-                        <select id="symptom" name="symptom" required>
-                            <option value="">Select</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </td>
-                    
-                    <td class="assessment">
-                        <label for="treat">Treatment Indicator</label>
-                        <select id="treat" name="treat" required>
-                            <option value="">Select</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="assessment" colspan="2">
-                        <label for="offtrt">Off-Treatment Indicator</label>
-                        <select id="offtrt" name="offtrt" required>
-                            <option value="">Select</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-
-            <button type="submit" name="submit" id="submit-assessment">SUBMIT</button>
-        </form>
-    </div>
+    <?php if ($showResult): ?>
+        <div class="result-card">
+            <h1>Assessment Result</h1>
+            <h3>Probability of Infection: <?php echo number_format($probability * 100, 2); ?>%</h3>
+            <h4>Status: <?php echo $infected ? "INFECTED" : "NOT INFECTED"; ?></h4>
+            <div class="button-group">
+                <a href="Assess.php" class="btn btn-primary">Take Another Assessment</a>
+                <a href="History.php" class="btn btn-secondary">View History</a>
+            </div>
+        </div>
+    <?php elseif (!empty($errorMessage)): ?>
+        <div class="error-card">
+            <h2>Error</h2>
+            <p><?php echo htmlspecialchars($errorMessage); ?></p>
+            <a href="Assess.php" class="btn btn-primary">Try Again</a>
+        </div>
+    <?php else: ?>
+        <div class="assessment-form">
+            <form action="Assess.php" method="post">
+                <h2>Assessment Form</h2>
+                <table>
+                    <tr>
+                        <td class="assessment">
+                            <label for="age">Age (years)</label>
+                            <input type="number" id="age" name="age" min="0" required>
+                        </td>
+                        <td class="assessment">
+                            <label for="weight">Weight (kg)</label>
+                            <input type="number" id="weight" name="weight" step="0.1" min="0" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="assessment">
+                            <label for="homo">Homosexual Activity</label>
+                            <select id="homo" name="homo" required>
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </td>
+                        <td class="assessment">
+                            <label for="drugs">History of IV Drug Use</label>
+                            <select id="drugs" name="drugs" required>
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="assessment">
+                            <label for="oprior">Prior Opportunistic Infection</label>
+                            <select id="oprior" name="oprior" required>
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </td>
+                        <td class="assessment">
+                            <label for="z30">AZT Use in Last 30 Days</label>
+                            <select id="z30" name="z30" required>
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="assessment">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                            </select>
+                        </td>
+                        <td class="assessment">
+                            <label for="str2">Antiretroviral History</label>
+                            <select id="str2" name="str2" required>
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="assessment">
+                            <label for="symptom">Symptomatic Indicator</label>
+                            <select id="symptom" name="symptom" required>
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </td>
+                        <td class="assessment">
+                            <label for="treat">Treatment Indicator</label>
+                            <select id="treat" name="treat" required>
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="assessment" colspan="2">
+                            <label for="offtrt">Off-Treatment Indicator</label>
+                            <select id="offtrt" name="offtrt" required>
+                                <option value="">Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit" name="submit" id="submit-assessment">SUBMIT</button>
+            </form>
+        </div>
+    <?php endif; ?>
 </body>
 </html>
